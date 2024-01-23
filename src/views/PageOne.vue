@@ -1,27 +1,32 @@
 // PageOne.vue
 <template>
   <div>
-    <h1>{{ title }}</h1>
+    <h1>{{ uppercasedTitle }}</h1>
     <input v-model="title" />
-    <button @click="changeTitle">Change Title</button>
+    <button @click="resetTitle">Reset Title</button>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
 export default {
   name: 'PageOne',
+  methods: {
+    resetTitle() {
+      this.title = 'Page One'
+    }
+  },
   setup() {
     const title = ref('Page One')
 
-    function changeTitle() {
-      title.value = 'New Title'
-    }
+    const uppercasedTitle = computed(() => {
+      return title.value.toUpperCase()
+    })
 
     return {
       title,
-      changeTitle
+      uppercasedTitle
     }
   }
 }
